@@ -81,5 +81,5 @@ defmodule Graph.Serializers.DOT do
     end)
   end
 
-  defp indent(tabs), do: String.duplicate(" ", tabs*4)
+  defp indent(tabs), do: String.duplicate(" ", tabs * 4)
 end

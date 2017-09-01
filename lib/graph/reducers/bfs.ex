@@ -3,6 +3,7 @@ defmodule Graph.Reducers.Bfs do
   This reducer traverses the graph using Breadth-First Search.
   """
   use Graph.Reducer
+  alias Graph.Utils
 
   @doc """
   Performs a breadth-first traversal of the graph, applying the provided mapping function to
@@ -77,7 +78,7 @@ defmodule Graph.Reducers.Bfs do
                 v_out
                 |> MapSet.to_list
                 |> Enum.reduce(q1, fn id, q ->
-                  weight = Graph.Utils.edge_weight(g, v_id, id)
+                  weight = Utils.edge_weight(g, v_id, id)
                   PriorityQueue.push(q, id, weight)
                 end)
               traverse(q2, g, visited, fun, acc2)

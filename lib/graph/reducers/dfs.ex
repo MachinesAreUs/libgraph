@@ -3,6 +3,7 @@ defmodule Graph.Reducers.Dfs do
   This reducer traverses the graph using Depth-First Search.
   """
   use Graph.Reducer
+  alias Graph.Utils
 
   @doc """
   Performs a depth-first traversal of the graph, applying the provided mapping function to
@@ -20,7 +21,8 @@ defmodule Graph.Reducers.Dfs do
       [1, 3, 2, 4]
   """
   def map(g, fun) when is_function(fun, 1) do
-    reduce(g, [], fn v, results -> {:next, [fun.(v)|results]} end)
+    g
+    |> reduce([], fn v, results -> {:next, [fun.(v)|results]} end)
     |> Enum.reverse
   end
 
@@ -67,7 +69,7 @@ defmodule Graph.Reducers.Dfs do
             oe
             |> Map.get(v_id, MapSet.new)
             |> MapSet.to_list
-            |> Enum.sort_by(fn id -> Graph.Utils.edge_weight(g, v_id, id) end)
+            |> Enum.sort_by(fn id -> Utils.edge_weight(g, v_id, id) end)
           traverse(out ++ rest, g, visited, fun, acc2)
         {:skip, acc2} ->
           # Skip this vertex and it's out-neighbors
@@ -78,6 +80,7 @@ defmodule Graph.Reducers.Dfs do
       end
     end
   end
+
   defp traverse([], _g, _visited, _fun, acc) do
     acc
   end

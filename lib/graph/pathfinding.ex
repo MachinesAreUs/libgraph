@@ -79,10 +79,10 @@ defmodule Graph.Pathfinding do
   defp do_bfs(q, %Graph{out_edges: oe} = g, target_id, %Graph{vertices: vs_tree} = tree, hfun) do
     case PriorityQueue.pop(q) do
       {{:value, {v_id, ^target_id}}, _q1} ->
-        v_id_tree = Graph.Utils.vertex_id(v_id)
+        v_id_tree = vertex_id(v_id)
         construct_path(v_id_tree, tree, [target_id])
       {{:value, {v1_id, v2_id}}, q1} ->
-        v2_id_tree = Graph.Utils.vertex_id(v2_id)
+        v2_id_tree = vertex_id(v2_id)
         if Map.has_key?(vs_tree, v2_id_tree) do
           do_bfs(q1, g, target_id, tree, hfun)
         else

@@ -55,7 +55,7 @@ defmodule Graph.Utils do
 
   defp sizeof_list([], size), do: size
   defp sizeof_list([term|rest], size) do
-    sizeof_list(rest, size+sizeof_term(term))
+    sizeof_list(rest, size + sizeof_term(term))
   end
   defp sizeof_list(term, size) do
     # improper list
@@ -69,11 +69,12 @@ defmodule Graph.Utils do
     sizeof_term(:erlang.element(n, term)) + size
   end
   defp sizeof_tuple(term, i, n, size) do
-    sizeof_tuple(term, i+1, n, size+sizeof_term(:erlang.element(i, term)))
+    sizeof_tuple(term, i + 1, n, size + sizeof_term(:erlang.element(i, term)))
   end
 
   def edge_weight(%Graph{edges: meta}, a, b) do
-    Map.fetch!(meta, {a, b})
+    meta
+    |> Map.fetch!({a, b})
     |> Enum.map(fn {_label, weight} -> weight end)
     |> Enum.min
   end

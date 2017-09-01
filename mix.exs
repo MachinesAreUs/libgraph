@@ -38,6 +38,7 @@ defmodule Graph.Mixfile do
     [{:benchee, "~> 0.8", only: :dev},
      {:eqc_ex, "~> 1.4", only: [:dev, :test]},
      {:excoveralls, "~> 0.7", only: [:dev, :test]},
+     {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
      {:ex_doc, ">= 0.0.0", only: :dev}]
   end
 

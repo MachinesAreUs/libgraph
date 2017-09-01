@@ -15,6 +15,7 @@ defmodule Graph.Reducer do
   `Graph.Reducers.Dfs` (for depth-first traversals). Simply choose the best one for your use case.
   """
 
+  # credo:disable-for-lines:3
   @callback map(g :: Graph.t, mapper :: (Graph.vertex -> term)) :: term
   @callback reduce(g :: Graph.t, acc :: term, reducer :: (Graph.vertex, term -> term)) :: {:next, term}
                                                                                         | {:halt, term}
